@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Staff Home - Medical Inventory</title>
+    <style>
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-animation {
+            animation: modalEnter 0.3s ease-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <div id="navegacion">
+
+    </div>  
+    <!-- Header Section -->
+    <header class="bg-white shadow-md p-6 mb-6">     
+        
+        <!-- Search Bar -->
+        <div class="mb-6">
+            <div class="relative">
+                <input id="searchInput" type="text" placeholder="Search medications, devices, supplies..."
+                    class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 focus:outline-none focus:ring-blue-600 focus:border-blue-600">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 12.65z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <!-- Filters in a Responsive Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+                <label for="filterCategory" class="block text-sm font-medium text-gray-700">Category</label>
+                <select id="filterCategory"
+                    class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-gray-100 text-gray-700 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-600">
+                    <option value="">All Categories</option>
+                    <option value="Medications">Medications</option>
+                    <option value="Surgical Instruments">Surgical Instruments</option>
+                    <option value="Diagnostic Equipment">Diagnostic Equipment</option>
+                    <option value="Consumables">Consumables</option>
+                </select>
+            </div>
+            <div>
+                <label for="filterProvider" class="block text-sm font-medium text-gray-700">Provider</label>
+                <select id="filterProvider"
+                    class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-gray-100 text-gray-700 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-600">
+                    <option value="">All Providers</option>
+                    <option value="Provider A">Provider A</option>
+                    <option value="Provider B">Provider B</option>
+                    <option value="Provider C">Provider C</option>
+                </select>
+            </div>
+            <div>
+                <label for="filterExpiry" class="block text-sm font-medium text-gray-700">Expiry Status</label>
+                <select id="filterExpiry"
+                    class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-gray-100 text-gray-700 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-600">
+                    <option value="">All Expiry Status</option>
+                    <option value="Expired">Expired</option>
+                    <option value="Expiring Soon">Expiring Soon</option>
+                    <option value="Valid">Valid</option>
+                </select>
+            </div>
+            <div>
+                <label for="filterLocation" class="block text-sm font-medium text-gray-700">Location</label>
+                <select id="filterLocation"
+                    class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-gray-100 text-gray-700 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-600">
+                    <option value="">All Locations</option>
+                    <option value="Pharmacy">Pharmacy</option>
+                    <option value="Surgery">Surgery</option>
+                    <option value="ICU">ICU</option>
+                    <option value="Ward">Ward</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: Inventory Table -->
+    <main class="max-w-7xl mx-auto px-4">
+        <!-- Bulk Edit Button (shown when one or more rows are selected) -->
+        <div id="bulkActions" class="mb-4 hidden">
+            <button onclick="openBulkEditModal()"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                Edit Selected (×<span id="selectedCount">0</span>)
+            </button>
+        </div>
+        <div class="bg-white shadow rounded-lg">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-700">Clinical Inventory</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200" id="inventoryTable">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-3">
+                                <input type="checkbox" id="selectAll" class="h-4 w-4">
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Product</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Quantity</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Category</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Provider</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Expiry Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Price</th>
+                            <th
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Sample Row 1 -->
+                        <tr data-id="med1">
+                            <td class="px-4 py-3"><input type="checkbox" class="rowCheckbox h-4 w-4"></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Aspirin 500mg</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex items-center">
+                                <button class="focus:outline-none text-blue-600" onclick="decrement('med1')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M20 12H4" />
+                                    </svg>
+                                </button>
+                                <span id="med1-quantity" class="mx-2">100</span>
+                                <button class="focus:outline-none text-blue-600" onclick="increment('med1')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </button>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Medications</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Provider A</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-05-01</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$5.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                <button onclick="openEditModal('med1')"
+                                    class="text-blue-600 hover:text-blue-900">Edit</button>
+                            </td>
+                        </tr>
+                        <!-- Sample Row 2 -->
+                        <tr data-id="med2">
+                            <td class="px-4 py-3"><input type="checkbox" class="rowCheckbox h-4 w-4"></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Syringe 5ml</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex items-center">
+                                <button class="focus:outline-none text-blue-600" onclick="decrement('med2')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M20 12H4" />
+                                    </svg>
+                                </button>
+                                <span id="med2-quantity" class="mx-2">50</span>
+                                <button class="focus:outline-none text-blue-600" onclick="increment('med2')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </button>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Consumables</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Provider B</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-12-15</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$0.50</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                <button onclick="openEditModal('med2')"
+                                    class="text-blue-600 hover:text-blue-900">Edit</button>
+                            </td>
+                        </tr>
+                        <!-- Additional rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Single Edit Modal Content -->
+    <div id="editModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+        <div class="modal-animation bg-white rounded-xl shadow-2xl w-[95%] max-w-lg p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Edit Product</h3>
+                <button onclick="closeEditModal()" class="text-gray-500 hover:text-gray-700">
+                    ✕
+                </button>
+            </div>
+            <form id="editForm" class="space-y-4">
+                <!-- Product Name Field -->
+                <div>
+                    <label for="editProductName" class="block text-gray-700 text-sm font-bold mb-1">
+                        Product Name
+                    </label>
+                    <input id="editProductName" type="text" placeholder="Enter product name"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600" />
+                </div>
+                <!-- Quantity Field with Increment/Decrement Controls -->
+                <div>
+                    <label for="editProductQuantity" class="block text-gray-700 text-sm font-bold mb-1">
+                        Quantity
+                    </label>
+                    <div class="flex">
+                        <button type="button" class="px-2 py-2 bg-blue-600 text-white rounded-l-md focus:outline-none"
+                            onclick="modalDecrement('editProductQuantity')">-</button>
+                        <input id="editProductQuantity" type="number" placeholder="0"
+                            class="w-full text-center px-3 py-2 border-t border-b focus:outline-none focus:ring-blue-600" />
+                        <button type="button" class="px-2 py-2 bg-blue-600 text-white rounded-r-md focus:outline-none"
+                            onclick="modalIncrement('editProductQuantity')">+</button>
+                    </div>
+                </div>
+                <!-- Category Selector -->
+                <div>
+                    <label for="editProductCategory" class="block text-gray-700 text-sm font-bold mb-1">
+                        Category
+                    </label>
+                    <select id="editProductCategory"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
+                        <option value="Medications">Medications</option>
+                        <option value="Surgical Instruments">Surgical Instruments</option>
+                        <option value="Diagnostic Equipment">Diagnostic Equipment</option>
+                        <option value="Consumables">Consumables</option>
+                    </select>
+                </div>
+                <!-- Provider Field -->
+                <div>
+                    <label for="editProductProvider" class="block text-gray-700 text-sm font-bold mb-1">
+                        Provider
+                    </label>
+                    <input id="editProductProvider" type="text" placeholder="Enter provider name"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600" />
+                </div>
+                <!-- Expiry Date Field -->
+                <div>
+                    <label for="editProductExpiry" class="block text-gray-700 text-sm font-bold mb-1">
+                        Expiry Date
+                    </label>
+                    <input id="editProductExpiry" type="date"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600" />
+                </div>
+                <!-- Price Field -->
+                <div>
+                    <label for="editProductPrice" class="block text-gray-700 text-sm font-bold mb-1">
+                        Price
+                    </label>
+                    <input id="editProductPrice" type="text" placeholder="Enter price"
+                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600" />
+                </div>
+                <!-- Form Action Buttons -->
+                <div class="flex justify-end space-x-4">
+                    <button type="button" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md focus:outline-none"
+                        onclick="closeEditModal()">Cancel</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md focus:outline-none">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <!-- Bulk Edit Modal -->
+    <div id="bulkEditModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+        <div class="modal-animation bg-white rounded-xl shadow-2xl w-[95%] max-w-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Edit Multiple</h3>
+                <button onclick="closeBulkEditModal()" class="text-gray-500 hover:text-gray-700">
+                    ✕
+                </button>
+            </div>
+            <form id="bulkEditForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Update Provider</label>
+                    <select id="bulkProvider" class="w-full p-2 border rounded-lg">
+                        <option value="">No Change</option>
+                        <option>Provider A</option>
+                        <option>Provider B</option>
+                        <option>Provider C</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Update Location</label>
+                    <select id="bulkLocation" class="w-full p-2 border rounded-lg">
+                        <option value="">No Change</option>
+                        <option>Pharmacy</option>
+                        <option>Surgery</option>
+                        <option>ICU</option>
+                    </select>
+                </div>
+                <div class="flex gap-3 justify-end">
+                    <button type="button" onclick="closeBulkEditModal()"
+                        class="px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Apply Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+    
+<script>
+    // Global State
+    let state = {
+      selectedIds: new Set(),
+      currentEditId: null
+    }
+    
+    // Quantity Controls
+    window.increment = id => updateQuantity(id, 1)
+    window.decrement = id => updateQuantity(id, -1)
+    
+    function updateQuantity(id, change) {
+      const span = document.getElementById(`${id}-quantity`)
+      span.textContent = Math.max(0, parseInt(span.textContent) + change)
+    }
+    
+    // Modals
+    const modals = {
+      single: {
+        element: document.getElementById('editModal'),
+        open: id => {
+          const row = document.querySelector(`tr[data-id="${id}"]`)
+          document.getElementById('editProductName').value = row.cells[1].textContent
+          document.getElementById('editProductQuantity').value = row.querySelector('[id$="-quantity"]').textContent
+          document.getElementById('editProductCategory').value = row.cells[3].textContent
+          document.getElementById('editProductProvider').value = row.cells[4].textContent
+          document.getElementById('editProductExpiry').value = row.cells[5].textContent
+          document.getElementById('editProductPrice').value = row.cells[6].textContent.replace('$', '')
+          state.currentEditId = id
+          modals.single.element.classList.remove('hidden')
+        },
+        close: () => modals.single.element.classList.add('hidden')
+      },
+      bulk: {
+        element: document.getElementById('bulkEditModal'),
+        open: () => modals.bulk.element.classList.remove('hidden'),
+        close: () => modals.bulk.element.classList.add('hidden')
+      }
+    }
+    
+    // Selection Management
+    function updateSelectionUI() {
+      const count = state.selectedIds.size
+      document.getElementById('selectedCount').textContent = count
+      document.getElementById('bulkActions').classList.toggle('hidden', count === 0)
+      document.getElementById('selectAll').checked = 
+        state.selectedIds.size === document.querySelectorAll('.rowCheckbox').length
+    }
+    
+    document.getElementById('selectAll').addEventListener('change', e => {
+      const checkboxes = document.querySelectorAll('.rowCheckbox')
+      checkboxes.forEach(cb => {
+        cb.checked = e.target.checked
+        e.target.checked ? state.selectedIds.add(cb.closest('tr').dataset.id) 
+                         : state.selectedIds.clear()
+      })
+      updateSelectionUI()
+    })
+    
+    document.querySelectorAll('.rowCheckbox').forEach(checkbox => {
+      checkbox.addEventListener('change', e => {
+        const id = e.target.closest('tr').dataset.id
+        e.target.checked ? state.selectedIds.add(id) 
+                         : state.selectedIds.delete(id)
+        updateSelectionUI()
+      })
+    })
+    
+    // Form Handlers
+    document.getElementById('editForm').addEventListener('submit', e => {
+      e.preventDefault()
+      const row = document.querySelector(`tr[data-id="${state.currentEditId}"]`)
+      row.cells[1].textContent = document.getElementById('editProductName').value
+      row.cells[3].textContent = document.getElementById('editProductCategory').value
+      row.cells[4].textContent = document.getElementById('editProductProvider').value
+      row.cells[5].textContent = document.getElementById('editProductExpiry').value
+      row.cells[6].textContent = `$${document.getElementById('editProductPrice').value}`
+      row.querySelector('[id$="-quantity"]').textContent = 
+        document.getElementById('editProductQuantity').value
+      modals.single.close()
+    })
+    
+    document.getElementById('bulkEditForm').addEventListener('submit', e => {
+      e.preventDefault()
+      const provider = document.getElementById('bulkProvider').value
+      const location = document.getElementById('bulkLocation').value
+    
+      state.selectedIds.forEach(id => {
+        const row = document.querySelector(`tr[data-id="${id}"]`)
+        if (provider) row.cells[4].textContent = provider
+        if (location) row.cells[7].textContent = location // Add location column in HTML
+      })
+    
+      modals.bulk.close()
+      document.getElementById('bulkProvider').selectedIndex = 0
+      document.getElementById('bulkLocation').selectedIndex = 0
+    })
+    
+    // Window API
+    window.openEditModal = id => modals.single.open(id)
+    window.closeEditModal = () => modals.single.close()
+    window.openBulkEditModal = () => modals.bulk.open()
+    window.closeBulkEditModal = () => modals.bulk.close()
+    </script>
+    <script src="../components/nav.js"></script>
+</body>
+
+</html>

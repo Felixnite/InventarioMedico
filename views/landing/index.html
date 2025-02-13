@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital StayWell - Cuidado Integral</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet>
+    <style>
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="font-[Poppins] bg-gray-50">
+    <!-- Header Section -->
+    <div id="navegacion">
+        
+    </div>
+
+    <header class="bg-gradient-to-r from-[#4769c2] to-[#97c76b] py-24 pt-32 px-8">
+        <div class="max-w-7xl mx-auto text-white space-y-8">
+            <h1 class="text-5xl font-bold leading-[1.15] animate-fadeIn">
+                Excelencia Médica <br>y Cuidado Humano
+            </h1>
+            <p class="text-lg leading-relaxed text-gray-100 max-w-2xl">
+                En StayWell combinamos tecnología de vanguardia con atención personalizada 
+                para ofrecer el más alto estándar en cuidado de salud.
+            </p>
+            <div class="flex gap-4">
+                <button class="px-8 py-4 bg-white text-[#4769c2] rounded-xl font-bold hover:bg-opacity-95 transition-all shadow-lg">
+                    Nuestros Servicios
+                </button>
+                <a href="#" class="px-8 py-4 bg-white/20 text-white rounded-xl font-semibold hover:bg-white/30 transition-all">
+                    Instalaciones
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Specialties Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-[#4769c2] text-center mb-4">
+                Nuestras Especialidades Médicas
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <!-- Cardiology Card -->
+                <div class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#97c76b]">
+                    <div class="w-16 h-16 bg-[#97c76b] rounded-2xl flex items-center justify-center text-3xl mb-6 text-white">
+                        ❤️
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Cardiología</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Nuestro equipo de cardiología ofrece diagnóstico avanzado y tratamiento personalizado para enfermedades del corazón, garantizando un cuidado integral y preventivo.
+                    </p>
+                </div>
+
+                <!-- Repeat for other specialties -->
+                <div class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#97c76b]">
+                    <div class="w-16 h-16 bg-[#97c76b] rounded-2xl flex items-center justify-center text-3xl mb-6 text-white">
+                        🩺
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Innovación Quirúrgica </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Contamos con tecnología de vanguardia para realizar cirugías mínimamente invasivas, asegurando recuperaciones rápidas y resultados óptimos.
+                    </p>
+                </div>
+
+                <div class="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#97c76b]">
+                    <div class="w-16 h-16 bg-[#97c76b] rounded-2xl flex items-center justify-center text-3xl mb-6 text-white">
+                        🧠
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Soluciones Neurológicas Avanzadas</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Nuestros expertos en neurología brindan atención especializada en el diagnóstico y tratamiento de trastornos neurológicos complejos
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Comunidad -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+        <!-- Columna Imagen -->
+        <div class="order-1 md:order-1 relative">
+            <img src="/img/landing-doctor.svg" 
+            class="bg-[#4769c2] rounded-2xl shadow-xl w-full h-auto alt="">
+            
+        </div>
+
+        <!-- Columna Contenido -->
+        <div class="order-2 md:order-2 space-y-8">
+            
+            <h2 class="text-3xl md:text-4xl font-bold text-[#4769c2] leading-tight">
+                Cuidamos juntos de nuestra comunidad
+            </h2>
+            
+            <!-- Iniciativas -->
+            <div class="space-y-6">
+                <!-- Tarjeta Iniciativa 1 -->
+                <div class="p-6 bg-white rounded-xl shadow-sm border-l-4 border-[#97c76b] hover:shadow-md transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-[#4769c2] p-3 rounded-lg text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Jornadas de salud gratuitas</h3>
+                            <p class="text-gray-600 mt-2">Programas mensuales en zonas vulnerables</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Iniciativa 2 -->
+                <div class="p-6 bg-white rounded-xl shadow-sm border-l-4 border-[#97c76b] hover:shadow-md transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-[#4769c2] p-3 rounded-lg text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Talleres educativos</h3>
+                            <p class="text-gray-600 mt-2">Capacitación en primeros auxilios y prevención</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Iniciativa 3 -->
+                <div class="p-6 bg-white rounded-xl shadow-sm border-l-4 border-[#97c76b] hover:shadow-md transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-[#4769c2] p-3 rounded-lg text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Apoyo a adultos mayores</h3>
+                            <p class="text-gray-600 mt-2">Programas de acompañamiento y cuidado</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Llamado a la acción -->
+            <div class="mt-8">
+                <button class="bg-[#97c76b] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#82ad5d] transition-colors flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                    Únete a nuestras iniciativas
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-[#4769c2] text-white pt-20 pb-12 text-center">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 items-center">
+            <!-- Contact Column -->
+            <div class="space-y-6 text-center">
+                <h3 class="text-xl font-semibold mb-4">Contacto</h3>
+                <p class="text-gray-200">
+                    Av. Médica 1234<br>
+                    Ciudad Salud, CP 5000<br>
+                    📞 (351) 456-7890
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-6">
+                <h3 class="text-xl font-semibold mb-4">Enlaces Rápidos</h3>
+                <nav class="grid gap-3 text-center">
+                    <a href="#" class="text-gray-200 hover:text-[#97c76b] transition-colors">
+                        Historia Clínica Digital
+                    </a>
+                    <a href="../login/index.html" class="text-gray-200 hover:text-[#97c76b] transition-colors">
+                        Acceso Profesional
+                    </a>
+                </nav>
+            </div>
+
+            <div class="space-y-6 text-center">
+                <h3 class="text-xl font-semibold mb-4 text-center">Enlaces Rápidos</h3>
+                <nav class="grid gap-3 text-center">
+                    <a href="#" class="text-gray-200 hover:text-[#97c76b] transition-colors">
+                        Historia Clínica Digital
+                    </a>
+                    <a href="/staff-login" class="text-gray-200 hover:text-[#97c76b] transition-colors">
+                        Acceso Profesional
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Second Footer Row -->
+        <div class="max-w-7xl mx-auto px-4 mt-16 border-t border-white/20 pt-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-300 text-sm">
+                    © 2024 Hospital StayWell. Todos los derechos reservados.
+                </p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-300 hover:text-[#97c76b] text-sm transition-colors">
+                        Política de Privacidad
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-[#97c76b] text-sm transition-colors">
+                        Términos de Uso
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../components/nav.js"></script>
+    <script src="landing.js"></script>
+</body>
+</html>
