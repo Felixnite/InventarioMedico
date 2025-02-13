@@ -43,6 +43,10 @@ app.use('/registro', express.static(path.resolve('views', 'registro')));
 app.use('/login', express.static(path.resolve('views', 'login')));
 app.use('/staff-home', express.static(path.resolve('views', 'staff-home')));
 app.use('/img', express.static(path.resolve('img')));
+app.use('/servicios', express.static(path.resolve('views','servicios')));
+app.use('/instalaciones', express.static(path.resolve('views','facilities')));
+app.use('/iniciativas', express.static(path.resolve('views','iniciativas')));
+
 
 // Backend routes
 app.use('/api/users', usersRouter);

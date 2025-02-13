@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Médicos - StayWell</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-poppins bg-gray-50">
+<div id="navegacion">
+    
+</div>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-[#4769c2] to-[#97c76b] py-20 px-6">
+        <div class="max-w-7xl mx-auto text-center animate-fadeInUp">
+            <h1 class="text-xl md:text-6xl font-bold font-playfair text-white mb-6 leading-tight">
+                Excelencia Médica en Cada Servicio
+            </h1>
+            <p class="text-xl text-white opacity-90 max-w-3xl mx-auto font-poppins">
+                En StayWell combinamos tecnología de vanguardia con atención humana para ofrecer cuidado integral en más de 50 especialidades médicas.
+            </p>
+            <div class="mt-12">
+                <img src="/img/doctors.svg" alt="Equipo médico" class="w-full max-w-md mx-auto h-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Principales -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+            <!-- Tarjeta Cirugía -->
+            <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
+                <div class="w-20 h-20 bg-[#97c76b] rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Cirugías de Alta Complejidad</h3>
+                <p class="text-gray-600 mb-1">Tecnología robótica y equipo multidisciplinario para intervenciones quirúrgicas precisas</p>
+                
+            </div>
+
+            <!-- Tarjeta Consultorios -->
+            <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
+                <div class="w-20 h-20 bg-[#4769c2] rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Consultorios Especializados</h3>
+                <p class="text-gray-600 mb-1">Más de 100 profesionales en 50 especialidades médicas a tu disposición</p>
+                
+            </div>
+
+            <!-- Tarjeta Diagnóstico -->
+            <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
+                <div class="w-20 h-20 bg-[#edbd45] rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Diagnóstico Avanzado</h3>
+                <p class="text-gray-600 mb-1">Equipos de última generación para estudios precisos y resultados rápidos</p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Especialidades Médicas -->
+    <section class="py-20 bg-[#f8fafc] px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-playfair">Nuestras Especialidades</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Cuidado integral en todas las áreas de la medicina moderna</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="hidden md:block">
+                    <img src="/img/experts.svg" alt="Especialidades médicas" class="w-full h-auto">
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+
+                    <div class="grid grid-cols-2 gap-8">
+                        
+                        <!-- Columna 1 -->
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#97c76b] rounded-lg flex items-center justify-center">
+                                    ❤️
+                                </div>
+                                <h3 class="text-xl font-semibold">Cardiología</h3>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#4769c2] rounded-lg flex items-center justify-center">
+                                    🧠
+                                </div>
+                                <h3 class="text-xl font-semibold">Neurología</h3>
+                            </div>
+                            <!-- Añadir más especialidades -->
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#97c76b] rounded-lg flex items-center justify-center">
+                                    ❤️
+                                </div>
+                                <h3 class="text-xl font-semibold">Cardiología</h3>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#4769c2] rounded-lg flex items-center justify-center">
+                                    🧠
+                                </div>
+                                <h3 class="text-xl font-semibold">Neurología</h3>
+                            </div>
+                        </div>
+
+                        <!-- Columna 2 -->
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#edbd45] rounded-lg flex items-center justify-center">
+                                    🦴
+                                </div>
+                                <h3 class="text-xl font-semibold">Ortopedia</h3>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#97c76b] rounded-lg flex items-center justify-center">
+                                    👶
+                                </div>
+                                <h3 class="text-xl font-semibold">Pediatría</h3>
+                            </div>
+                            <!-- Añadir más especialidades -->
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#4769c2] rounded-lg flex items-center justify-center">
+                                    🧠
+                                </div>
+                                <h3 class="text-xl font-semibold">Neurología</h3>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-[#97c76b] rounded-lg flex items-center justify-center">
+                                    👶
+                                </div>
+                                <h3 class="text-xl font-semibold">Pediatría</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios de Diagnóstico -->
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 font-playfair">Tecnología al Servicio de la Salud</h2>
+                <div class="space-y-6">
+                    <div class="p-6 bg-white rounded-xl shadow-sm border-l-4 border-[#4769c2]">
+                        <h3 class="text-xl font-semibold mb-2">Imagenología Avanzada</h3>
+                        <p class="text-gray-600">Resonancia magnética 3T, Tomografía 640 cortes, Ultrasonido 4D</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-xl shadow-sm border-l-4 border-[#97c76b]">
+                        <h3 class="text-xl font-semibold mb-2">Laboratorio Clínico</h3>
+                        <p class="text-gray-600">Resultados precisos en tiempo récord con tecnología automatizada</p>
+                    </div>
+                </div>
+            </div>
+            <img src="/img/medical-research.svg" alt="Tecnología médica" class="w-full max-w-2xl mx-auto">
+        </div>
+    </section>
+
+    <!-- Nuevo Carrusel de Especialistas -->
+    <section class="py-20 bg-white px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center font-playfair">
+                Nuestros Especialistas
+            </h2>
+            <div class="relative">
+                <!-- Carrusel Container -->
+                <div id="doctorCarousel" class="overflow-hidden relative">
+                    <div class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Card 1 -->
+                        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
+                            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
+                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
+                                <p class="text-gray-600 mb-2">Cardiólogo</p>
+                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                            </div>
+                        </div>
+                        <!-- Repetir para más doctores -->
+                        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
+                            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
+                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
+                                <p class="text-gray-600 mb-2">Cardiólogo</p>
+                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
+                            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
+                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
+                                <p class="text-gray-600 mb-2">Cardiólogo</p>
+                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
+                            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
+                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
+                                <p class="text-gray-600 mb-2">Cardiólogo</p>
+                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
+                            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
+                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
+                                <p class="text-gray-600 mb-2">Cardiólogo</p>
+                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles del Carrusel -->
+                <button id="prevButton" class="absolute top-1/2 -left-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+                    &larr;
+                </button>
+                <button id="nextButton" class="absolute top-1/2 -right-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+                    &rarr;
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Mejorado -->
+    <footer class="bg-[#4769c2] text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 text-sm">
+            <div>
+                <h3 class="font-bold mb-4">StayWell Hospital</h3>
+                <p class="opacity-90">Excelencia médica y cuidado humano desde 1995</p>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Contacto</h3>
+                <p class="opacity-90">📞 (351) 456-7890</p>
+                <p class="opacity-90">✉️ info@staywell.com</p>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Enlaces Rápidos</h3>
+                <nav class="space-y-2">
+                    <a href="#" class="opacity-90 hover:opacity-100">Especialidades</a>
+                    <a href="#" class="opacity-90 hover:opacity-100">Instalaciones</a>
+                    <a href="#" class="opacity-90 hover:opacity-100">Servicios</a>
+                </nav>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Legal</h3>
+                <nav class="space-y-2">
+                    <a href="#" class="opacity-90 hover:opacity-100">Política de Privacidad</a>
+                    <a href="#" class="opacity-90 hover:opacity-100">Términos y Condiciones</a>
+                </nav>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/20 text-center text-sm opacity-90">
+            © 2024 StayWell Hospital. Todos los derechos reservados.
+        </div>
+    </footer>
+    <script src="./servicios.js"></script>
+    <script src="../components/nav.js"></script>
+</body>
+</html>

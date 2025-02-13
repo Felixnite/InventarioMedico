@@ -46,17 +46,25 @@
                 </div>
             </div>
         </div>
-        <!-- Filters in a Responsive Grid -->
+        <!-- Filters  -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
                 <label for="filterCategory" class="block text-sm font-medium text-gray-700">Category</label>
                 <select id="filterCategory"
                     class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-gray-100 text-gray-700 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-600">
                     <option value="">All Categories</option>
-                    <option value="Medications">Medications</option>
-                    <option value="Surgical Instruments">Surgical Instruments</option>
-                    <option value="Diagnostic Equipment">Diagnostic Equipment</option>
-                    <option value="Consumables">Consumables</option>
+                    <option value="Medicamentos">Medicamentos</option>
+                    <option value="Instrumentos quirurgicos">Instrumentos quirurgicos</option>
+                    <option value="Equipamiento medico">Equipamiento medico</option>
+                    <option value="Consumibles">Consumibles</option>
+                    <option value="Suministros de especialidad">Items de especialidad</option>
+                    <option value="Emergencia y trauma">Emergencia y trauma</option>
+                    <option value="Equipamiento de porteccion personal">Equipamiento de porteccion personal</option>
+                    <option value="Suministros de laboratorio">Suministros de laboratorioEmergencia y trauma</option>
+
+
+
+
                 </select>
             </div>
             <div>
@@ -64,9 +72,18 @@
                 <select id="filterProvider"
                     class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-gray-100 text-gray-700 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-600">
                     <option value="">All Providers</option>
-                    <option value="Provider A">Provider A</option>
-                    <option value="Provider B">Provider B</option>
-                    <option value="Provider C">Provider C</option>
+                    <option value="Provider A" id="providerA">Provider A</option>
+                    <option value="Provider B" id="providerB">Provider B</option>
+                    <option value="Provider C" id="providerC">Provider C</option>
+                </select>
+            </div>
+            <div>
+                <label for="filterUsage" class="block text-sm font-medium text-gray-700">Usage</label>
+                <select id="filterUsage"
+                    class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-gray-100 text-gray-700 rounded-md focus:outline-none focus:ring-blue-600 focus:border-blue-600">
+                    <option value="">Usage</option>
+                    <option value="Reusable">Reusable</option>
+                    <option value="Disposable">Disposable</option>
                 </select>
             </div>
             <div>
@@ -87,7 +104,7 @@
                     <option value="Pharmacy">Pharmacy</option>
                     <option value="Surgery">Surgery</option>
                     <option value="ICU">ICU</option>
-                    <option value="Ward">Ward</option>
+                    <option value="Pabellon">Pabellon</option>
                 </select>
             </div>
         </div>
@@ -121,6 +138,8 @@
                                 Category</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Provider</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Usage</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Expiry Date</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -131,7 +150,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <!-- Sample Row 1 -->
+                        <!-- Row 1 -->
                         <tr data-id="med1">
                             <td class="px-4 py-3"><input type="checkbox" class="rowCheckbox h-4 w-4"></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Aspirin 500mg</td>
@@ -154,6 +173,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Medications</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Provider A</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Disposable</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-05-01</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$5.00</td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
@@ -161,7 +181,7 @@
                                     class="text-blue-600 hover:text-blue-900">Edit</button>
                             </td>
                         </tr>
-                        <!-- Sample Row 2 -->
+                        <!-- Row 2 -->
                         <tr data-id="med2">
                             <td class="px-4 py-3"><input type="checkbox" class="rowCheckbox h-4 w-4"></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Syringe 5ml</td>
@@ -184,6 +204,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Consumables</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Provider B</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Disposable</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-12-15</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$0.50</td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
@@ -191,7 +212,7 @@
                                     class="text-blue-600 hover:text-blue-900">Edit</button>
                             </td>
                         </tr>
-                        <!-- Additional rows as needed -->
+                        <!-- Additional rows -->
                     </tbody>
                 </table>
             </div>
