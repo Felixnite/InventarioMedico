@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Admin Dashboard - StayWell</title>
+    <!-- Reuse existing styles -->
+    <style>
+        @keyframes modalEnter {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-animation { animation: modalEnter 0.3s ease-out; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <div id="navegacion"></div>
+
+    <!-- Admin Dashboard Content -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Total Items</p>
+                        <p class="text-3xl font-bold">1,234</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        📦
+                    </div>
+                </div>
+            </div>
+            <!-- Add similar cards for Low Stock, Pending Orders, Expired Items -->
+        </div>
+
+        <!-- Low Stock Alerts Section -->
+        <div class="bg-white rounded-lg shadow mb-8">
+            <div class="p-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-700">Low Stock Alerts</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Item</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Current Stock</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Minimum Required</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Low stock items rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Provider Management Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="text-lg font-semibold text-gray-700">Suppliers & Providers</h2>
+                    <button onclick="openProviderModal()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                        + New Provider
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Provider</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Contact</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Last Order</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Providers rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Order Management Section -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="text-lg font-semibold text-gray-700">Pending Orders</h2>
+                    <button onclick="openOrderModal()" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                        + New Order
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Order ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Provider</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Orders rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Provider Management Modal -->
+    <div id="providerModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+        <div class="modal-animation bg-white rounded-xl shadow-2xl w-[95%] max-w-2xl p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Manage Provider</h3>
+                <button onclick="closeProviderModal()" class="text-gray-500 hover:text-gray-700">
+                    ✕
+                </button>
+            </div>
+            <form class="space-y-4">
+                <!-- Provider form fields -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Provider Name</label>
+                        <input type="text" class="w-full px-3 py-2 border rounded-md">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Contact Email</label>
+                        <input type="email" class="w-full px-3 py-2 border rounded-md">
+                    </div>
+                </div>
+                <!-- Form actions -->
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Creation Modal -->
+    <div id="orderModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+        <div class="modal-animation bg-white rounded-xl shadow-2xl w-[95%] max-w-3xl p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Create New Order</h3>
+                <button onclick="closeOrderModal()" class="text-gray-500 hover:text-gray-700">
+                    ✕
+                </button>
+            </div>
+            <form class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Select Provider</label>
+                        <select class="w-full px-3 py-2 border rounded-md">
+                            <!-- Provider options -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Order Deadline</label>
+                        <input type="date" class="w-full px-3 py-2 border rounded-md">
+                    </div>
+                </div>
+                <!-- Order items selection -->
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+    <script src="../components/nav.js"></script>
+</body>
+</html>
