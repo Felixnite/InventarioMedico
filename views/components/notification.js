@@ -14,6 +14,7 @@ const createNotification = (isError, message) => {
 
     if (isError) {
         notificationContent.classList.add('bg-red-500');
+        console.log(error)
     } else {
         notificationContent.classList.add('bg-green-500');
     }

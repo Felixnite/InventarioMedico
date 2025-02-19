@@ -5,7 +5,7 @@ exports.createItem = async (req, res) => {
     try {
         const newItem = new Inventory({
             ...req.body,
-            createdBy: req.session.userId
+            //createdBy: req.session.userId
         });
         const savedItem = await newItem.save();
         res.status(201).json(savedItem);

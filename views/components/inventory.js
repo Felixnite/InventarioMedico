@@ -1,4 +1,9 @@
 const inventory = document.querySelector('#inventory')
+const notification = document.querySelector('#notification');
+import { inventoryAPI } from '../../src/api/inventory'; 
+// import { createNotification } from './notification.js';
+// 1. Obtener referencia al formulario
+const createForm = document.querySelector('#createForm');
 
 //Inventory for the admin view
 const crearInventarioAdmin = () => {
@@ -20,8 +25,7 @@ const crearInventarioAdmin = () => {
         </div>
 
         <!-- Create Button -->
-        <button onclick="openCreateModal()" 
-                class="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+        <button id="createItemButton" class="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
@@ -201,13 +205,13 @@ const crearInventarioAdmin = () => {
         </div>
     </main>
 
-    <!-- Create Item Modal -->
+   <!-- Create Item Modal -->
 <div id="createModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
     <div class="modal-animation bg-white rounded-xl shadow-2xl w-[95%] max-w-lg p-6">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-xl font-semibold">Add New Inventory Item</h3>
-            <button onclick="closeCreateModal()" class="text-gray-500 hover:text-gray-700">
-                ✕
+            <button id="closeCreateModalButton">
+            ✕
             </button>
         </div>
         <form id="createForm" class="space-y-4">
@@ -216,7 +220,7 @@ const crearInventarioAdmin = () => {
                 <label class="block text-gray-700 text-sm font-bold mb-1">
                     Product Name
                 </label>
-                <input type="text" placeholder="Enter product name" required
+                <input type="text" id="createProductName" placeholder="Enter product name" required
                     class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
             </div>
 
@@ -226,17 +230,15 @@ const crearInventarioAdmin = () => {
                     Category
                 </label>
                 <div class="flex gap-2">
-                    <select class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600"
-                            onchange="handleCategorySelect(this)">
+                    <select id="createCategory" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                         <option value="">Select Category</option>
                         <option value="Medicamentos">Medicamentos</option>
                         <option value="Instrumentos quirurgicos">Instrumentos quirurgicos</option>
                         <option value="Equipamiento medico">Equipamiento medico</option>
                         <option value="new">+ Add New Category</option>
                     </select>
-                    <input type="text" placeholder="New Category Name" 
-                           class="hidden w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600"
-                           id="newCategoryInput">
+                    <input type="text" id="newCategoryInput" placeholder="New Category Name" 
+                           class="hidden w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                 </div>
             </div>
 
@@ -246,17 +248,15 @@ const crearInventarioAdmin = () => {
                     Provider
                 </label>
                 <div class="flex gap-2">
-                    <select class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600"
-                            onchange="handleProviderSelect(this)">
+                    <select id="createProvider" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                         <option value="">Select Provider</option>
                         <option value="Provider A">Provider A</option>
                         <option value="Provider B">Provider B</option>
                         <option value="Provider C">Provider C</option>
                         <option value="new">+ Add New Provider</option>
                     </select>
-                    <input type="text" placeholder="New Provider Name" 
-                           class="hidden w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600"
-                           id="newProviderInput">
+                    <input type="text" id="newProviderInput" placeholder="New Provider Name" 
+                           class="hidden w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                 </div>
             </div>
 
@@ -264,22 +264,22 @@ const crearInventarioAdmin = () => {
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-1">Quantity</label>
-                    <input type="number" min="0" value="0" required
+                    <input type="number" id="createQuantity" min="0" value="0" required
                         class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-1">Price</label>
-                    <input type="number" step="0.01" min="0" required
+                    <input type="number" id="createPrice" step="0.01" min="0" required
                         class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-1">Expiry Date</label>
-                    <input type="date" 
+                    <input type="date" id="createExpiry" 
                         class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-1">Location</label>
-                    <select class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
+                    <select id="createLocation" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                         <option value="Pharmacy">Pharmacy</option>
                         <option value="Surgery">Surgery</option>
                         <option value="ICU">ICU</option>
@@ -288,7 +288,7 @@ const crearInventarioAdmin = () => {
             </div>
 
             <div class="flex justify-end gap-4">
-                <button type="button" onclick="closeCreateModal()"
+                <button type="button" id="cancelCreateModalButton"
                     class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition-colors">
                     Cancel
                 </button>
@@ -423,6 +423,10 @@ const crearInventarioAdmin = () => {
         </div>
     </div>
     `
+    setTimeout(() => {
+        setupEventListeners();
+        setupFormValidation();
+    }, 0);
 }
 
 
@@ -643,25 +647,117 @@ const crearInventarioStaff = () => {
 }
 
 // Modal Handling
+function setupEventListeners() {
+    // Botón de creación
+    document.getElementById('createItemButton')?.addEventListener('click', openCreateModal);
+
+    // Botones de modales
+    document.querySelector('#createModal button')?.addEventListener('click', closeCreateModal);
+    document.querySelector('#editModal button')?.addEventListener('click', closeEditModal);
+
+    // En setupEventListeners()
+    document.querySelector('#createCategory').addEventListener('change', (e) => handleCategorySelect(e.target));
+    document.querySelector('#createProvider').addEventListener('change', (e) => handleProviderSelect(e.target));
+
+    // En setupEventListeners()
+    document.getElementById('closeCreateModalButton')?.addEventListener('click', closeCreateModal);
+    // Botones de incremento/decremento
+    document.querySelectorAll('[data-action="increment"], [data-action="decrement"]').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const itemId = e.target.closest('tr').dataset.id;
+            const action = e.target.dataset.action;
+            handleQuantityChange(itemId, action);
+        });
+    });
+
+    // Botones de edición
+    document.querySelectorAll('[data-action="edit"]').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const itemId = e.target.closest('tr').dataset.id;
+            openEditModal(itemId);
+        });
+    });
+}
+
+function handleCategorySelect(select) {
+    const newInput = document.getElementById('newCategoryInput');
+    newInput.classList.toggle('hidden', select.value !== 'new');
+    newInput.required = select.value === 'new';
+  }
+  
+  function handleProviderSelect(select) {
+    const newInput = document.getElementById('newProviderInput');
+    newInput.classList.toggle('hidden', select.value !== 'new');
+    newInput.required = select.value === 'new';
+  }
+// ======================
+// Funciones de modales
+// ======================
 function openCreateModal() {
-    document.getElementById('createModal').classList.remove('hidden')
+    document.getElementById('createModal').classList.remove('hidden');
 }
 
 function closeCreateModal() {
-    document.getElementById('createModal').classList.add('hidden')
+    document.getElementById('createModal').classList.add('hidden');
 }
 
-// Dynamic Field Handling
-function handleCategorySelect(select) {
-    const newInput = document.getElementById('newCategoryInput')
-    newInput.classList.toggle('hidden', select.value !== 'new')
-    newInput.required = select.value === 'new'
+function openEditModal(itemId) {
+    // Lógica para cargar datos del item
+    document.getElementById('editModal').classList.remove('hidden');
 }
 
-function handleProviderSelect(select) {
-    const newInput = document.getElementById('newProviderInput')
-    newInput.classList.toggle('hidden', select.value !== 'new')
-    newInput.required = select.value === 'new'
+function closeEditModal() {
+    document.getElementById('editModal').classList.add('hidden');
+}
+
+// ======================
+// Funciones de cantidad
+// ======================
+function handleQuantityChange(itemId, action) {
+    const quantityElement = document.getElementById(`${itemId}-quantity`);
+    if (!quantityElement) return;
+
+    let quantity = parseInt(quantityElement.textContent);
+    quantity = action === 'increment' ? quantity + 1 : Math.max(0, quantity - 1);
+    quantityElement.textContent = quantity;
+}
+
+// ======================
+// Manejo de formularios
+// ======================
+function setupFormValidation() {
+    const createForm = document.querySelector('#createForm');
+
+    createForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = {
+            name: document.getElementById('createProductName').value,
+            quantity: parseInt(document.getElementById('createQuantity').value),
+            // ... otros campos
+        };
+
+        try {
+            await inventoryAPI.createItem(formData);
+            createNotification(false, '¡Item creado exitosamente!');
+            closeCreateModal();
+            // Actualizar la tabla aquí
+        } catch (error) {
+            createNotification(true, error.message);
+        }
+    });
+}
+
+// ======================
+// Notificaciones
+// ======================
+export function createNotification(isError, message) {
+    notification.textContent = message;
+    notification.classList.toggle('bg-red-500', isError);
+    notification.classList.toggle('bg-green-500', !isError);
+    notification.classList.remove('hidden');
+
+    setTimeout(() => notification.classList.add('hidden'), 3000);
 }
 
 if (window.location.pathname === '/staff-home/') {
