@@ -1,6 +1,6 @@
 const inventory = document.querySelector('#inventory')
 const notification = document.querySelector('#notification');
-import { inventoryAPI } from '../../src/api/inventory'; 
+import { inventoryAPI } from '../../src/api/inventory.js'; 
 // import { createNotification } from './notification.js';
 // 1. Obtener referencia al formulario
 const createForm = document.querySelector('#createForm');
