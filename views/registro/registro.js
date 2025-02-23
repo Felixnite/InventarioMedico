@@ -22,7 +22,10 @@ const emailVal = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordVal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const validateForm = () => {
-    submitBtn.disabled = !(valEmail && valPassword && valMatch && valName);
+    const allValid = valEmail && valPassword && valMatch && valName;
+    submitBtn.disabled = !allValid;
+    submitBtn.classList.toggle('opacity-50', !allValid);
+    submitBtn.classList.toggle('cursor-not-allowed', !allValid);
 };
 
 // Fix border color classes (Tailwind requires full class names)

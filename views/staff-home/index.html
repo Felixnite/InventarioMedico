@@ -2,153 +2,41 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Staff Home - Medical Inventory</title>
-    <style>
-        @keyframes modalEnter {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Home - Medical Inventory</title>
+  <link href="/styles.css" rel="stylesheet">
+  <style>
+    @keyframes modalEnter {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .modal-animation {
-            animation: modalEnter 0.3s ease-out;
-        }
-    </style>
+    .modal-animation {
+      animation: modalEnter 0.3s ease-out;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100">
-    
-    <div id="navegacion">
 
-    </div>  
-    <div id="inventory">
+  <div id="navegacion">
 
-    </div>
-    
-    
+  </div>
+  <div id="inventory">
 
+  </div>
 
-
-
-
-
-    
-<!-- <script>
-    // Global State
-    let state = {
-      selectedIds: new Set(),
-      currentEditId: null
-    }
-    
-    // Quantity Controls
-    window.increment = id => updateQuantity(id, 1)
-    window.decrement = id => updateQuantity(id, -1)
-    
-    function updateQuantity(id, change) {
-      const span = document.getElementById(`${id}-quantity`)
-      span.textContent = Math.max(0, parseInt(span.textContent) + change)
-    }
-    
-    // Modals
-    const modals = {
-      single: {
-        element: document.getElementById('editModal'),
-        open: id => {
-          const row = document.querySelector(`tr[data-id="${id}"]`)
-          document.getElementById('editProductName').value = row.cells[1].textContent
-          document.getElementById('editProductQuantity').value = row.querySelector('[id$="-quantity"]').textContent
-          document.getElementById('editProductCategory').value = row.cells[3].textContent
-          document.getElementById('editProductProvider').value = row.cells[4].textContent
-          document.getElementById('editProductExpiry').value = row.cells[5].textContent
-          document.getElementById('editProductPrice').value = row.cells[6].textContent.replace('$', '')
-          state.currentEditId = id
-          modals.single.element.classList.remove('hidden')
-        },
-        close: () => modals.single.element.classList.add('hidden')
-      },
-      bulk: {
-        element: document.getElementById('bulkEditModal'),
-        open: () => modals.bulk.element.classList.remove('hidden'),
-        close: () => modals.bulk.element.classList.add('hidden')
-      }
-    }
-    
-    // Selection Management
-    function updateSelectionUI() {
-      const count = state.selectedIds.size
-      document.getElementById('selectedCount').textContent = count
-      document.getElementById('bulkActions').classList.toggle('hidden', count === 0)
-      document.getElementById('selectAll').checked = 
-        state.selectedIds.size === document.querySelectorAll('.rowCheckbox').length
-    }
-    
-    document.getElementById('selectAll').addEventListener('change', e => {
-      const checkboxes = document.querySelectorAll('.rowCheckbox')
-      checkboxes.forEach(cb => {
-        cb.checked = e.target.checked
-        e.target.checked ? state.selectedIds.add(cb.closest('tr').dataset.id) 
-                         : state.selectedIds.clear()
-      })
-      updateSelectionUI()
-    })
-    
-    document.querySelectorAll('.rowCheckbox').forEach(checkbox => {
-      checkbox.addEventListener('change', e => {
-        const id = e.target.closest('tr').dataset.id
-        e.target.checked ? state.selectedIds.add(id) 
-                         : state.selectedIds.delete(id)
-        updateSelectionUI()
-      })
-    })
-    
-    // Form Handlers
-    document.getElementById('editForm').addEventListener('submit', e => {
-      e.preventDefault()
-      const row = document.querySelector(`tr[data-id="${state.currentEditId}"]`)
-      row.cells[1].textContent = document.getElementById('editProductName').value
-      row.cells[3].textContent = document.getElementById('editProductCategory').value
-      row.cells[4].textContent = document.getElementById('editProductProvider').value
-      row.cells[5].textContent = document.getElementById('editProductExpiry').value
-      row.cells[6].textContent = `$${document.getElementById('editProductPrice').value}`
-      row.querySelector('[id$="-quantity"]').textContent = 
-        document.getElementById('editProductQuantity').value
-      modals.single.close()
-    })
-    
-    document.getElementById('bulkEditForm').addEventListener('submit', e => {
-      e.preventDefault()
-      const provider = document.getElementById('bulkProvider').value
-      const location = document.getElementById('bulkLocation').value
-    
-      state.selectedIds.forEach(id => {
-        const row = document.querySelector(`tr[data-id="${id}"]`)
-        if (provider) row.cells[4].textContent = provider
-        if (location) row.cells[7].textContent = location // Add location column in HTML
-      })
-    
-      modals.bulk.close()
-      document.getElementById('bulkProvider').selectedIndex = 0
-      document.getElementById('bulkLocation').selectedIndex = 0
-    })
-    
-    // Window API
-    window.openEditModal = id => modals.single.open(id)
-    window.closeEditModal = () => modals.single.close()
-    window.openBulkEditModal = () => modals.bulk.open()
-    window.closeBulkEditModal = () => modals.bulk.close()
-    </script> -->
-    <script src="../components/nav.js"></script>
-    <script src="../components/inventory.js"></script>
-    <script src="/src/api/inventory.js"></script>
+  <script src="../components/nav.js"></script>
+  <script type="module" src="/components/inventory.js"></script>
+  <script type="module" src="/src/api/inventory.js"></script>
 </body>
 
 </html>

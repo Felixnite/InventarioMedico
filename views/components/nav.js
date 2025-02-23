@@ -24,16 +24,18 @@ const crearNavHome = () => {
                             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span class="ml-2 text-white text-2xl font-bold">StayWell</span>
+                        <span class="ml-2 text-white text-2xl font-bold">
+                        <a href="/">StayWell</a>
+                        </span>
                     </div>
 
                     <!-- Menú desktop -->
                     <div class="hidden md:flex items-center space-x-8">
-                        <a href="#iniciativas" class="text-white hover:text-[#97c76b] transition-colors font-semibold">
+                        <a href="/iniciativas/" class="text-white hover:text-[#97c76b] transition-colors font-semibold">
                             Iniciativas
                         </a>
                         
-                        <a href="#instalaciones" class="text-white hover:text-[#97c76b] transition-colors font-semibold">
+                        <a href="/instalaciones/" class="text-white hover:text-[#97c76b] transition-colors font-semibold">
                             Instalaciones
                         </a>
                         <a href="/servicios/" class="ml-4 text-sm font-semibold text-[/servicios/4769c2] bg-white py-2 px-4 rounded-full 
@@ -59,13 +61,13 @@ const crearNavHome = () => {
             
             <div id="mobile-menu" class="md:hidden fixed right-4 bg-white rounded-sm shadow-xl z-50 w-64 hidden">
                 <div class="py-4">
-                    <a href="#servicios" class="block px-6 py-3 text-gray-800 font-semibold hover:bg-gray-100">
+                    <a href="/servicios/" class="block px-6 py-3 text-gray-800 font-semibold hover:bg-gray-100">
                         Servicios
                     </a>
-                    <a href="#instalaciones" class="block px-6 py-3 text-gray-800 font-semibold hover:bg-gray-100">
+                    <a href="/instalaciones/" class="block px-6 py-3 text-gray-800 font-semibold hover:bg-gray-100">
                         Instalaciones
                     </a>
-                    <a href="#iniciativas" class="block px-6 py-3 text-gray-800 font-semibold hover:bg-gray-100">
+                    <a href="/iniciativas/" class="block px-6 py-3 text-gray-800 font-semibold hover:bg-gray-100">
                         Iniciativas
                     </a>
                 </div>

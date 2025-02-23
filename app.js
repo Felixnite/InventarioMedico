@@ -10,56 +10,24 @@ const morgan = require('morgan');
 const authRouter = require('./controllers/auth.js');
 const session = require('express-session');
 const helmet = require('helmet');
-// import { fileURLToPath } from 'url';
+const Inventory = require('./model/inventory');
 
-// Configuración para ES Modules
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-
-// Import inventory controller
-const inventoryController = require('./controllers/inventory.js');
-
+// Database Connection
 (async () => {
     try {
         await mongoose.connect(process.env.MONGO_URL);
-        console.log('Conectado MongoDB');
+        console.log('Connected to MongoDB');
     } catch (error) {
-        console.log(error);
+        console.log('MongoDB connection error:', error);
     }
 })();
 
 // Middleware
-// Add to middleware section
-
 app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: [
-                "'self'",
-                "'unsafe-inline'", // Solo para desarrollo
-                "https://cdn.tailwindcss.com", // Permitir Tailwind
-                "http://localhost:3000"
-            ],
-            styleSrc: [
-                "'self'",
-                "'unsafe-inline'",
-                "https://cdn.tailwindcss.com" // Permitir estilos de Tailwind
-            ],
-            imgSrc: ["'self'", "data:"],
-            connectSrc: ["'self'", "http://localhost:3000"],
-            fontSrc: ["'self'"],
-            objectSrc: ["'none'"]
-        }
+    helmet({
+      contentSecurityPolicy: false
     })
-);
-app.use(express.static('public', {
-    setHeaders: (res) => {
-        res.setHeader('Content-Type', 'application/javascript');
-    }
-}));
-
-
+  );
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors({
@@ -72,32 +40,95 @@ app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET || 'secureAdminPass123',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
+    saveUninitialized: false,
+    cookie: { 
+        secure: false,
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+    }
 }));
-// Serve src directory
-app.use('/src', express.static(path.join(__dirname, 'src')));
 
+// Static Files
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/components', express.static(path.join(__dirname, 'views/components')));
 
-// Frontend routes
-app.use('/', express.static(path.resolve('views', 'landing')));
-app.use('/components', express.static(path.resolve('views', 'components')));
-app.use('/registro', express.static(path.resolve('views', 'registro')));
-app.use('/login', express.static(path.resolve('views', 'login')));
-app.use('/staff-home', express.static(path.resolve('views', 'staff-home')));
-app.use('/admin-home', express.static(path.resolve('views', 'admin-home')));
-app.use('/img', express.static(path.resolve('img')));
-app.use('/servicios', express.static(path.resolve('views', 'servicios')));
-app.use('/instalaciones', express.static(path.resolve('views', 'facilities')));
-app.use('/iniciativas', express.static(path.resolve('views', 'iniciativas')));
-app.use('/admin-board', express.static(path.resolve('views', 'admin-board')));
-app.use('/staff-board', express.static(path.resolve('views', 'staff-board')));
+// Frontend Routes
+app.use('/', express.static(path.join(__dirname, 'views/landing')));
+app.use('/components', express.static(path.join(__dirname, 'views/components')));
+app.use('/registro', express.static(path.join(__dirname, 'views/registro')));
+app.use('/login', express.static(path.join(__dirname, 'views/login')));
+app.use('/staff-home', express.static(path.join(__dirname, 'views/staff-home')));
+app.use('/admin-home', express.static(path.join(__dirname, 'views/admin-home')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
-// Backend routes
+// Backend Routes
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 
-// Inventory routes
-app.post('/api/inventory', inventoryController.createItem);
-app.get('/api/inventory', inventoryController.getInventory);
-module.exports = app;
+// Inventory Routes
+app.post('/api/inventory', async (req, res) => {
+    try {
+        // Verify session
+        if (!req.session.userId) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+
+        // Validate required fields
+        const requiredFields = ['name', 'quantity', 'category', 'provider', 'usageType', 'expiryDate', 'price', 'location'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        
+        if (missingFields.length > 0) {
+            return res.status(400).json({
+                error: `Missing required fields: ${missingFields.join(', ')}`
+            });
+        }
+
+        // Create item
+        const newItem = new Inventory({
+            ...req.body,
+            createdBy: req.session.userId
+        });
+
+        const savedItem = await newItem.save();
+        res.status(201).json(savedItem);
+
+    } catch (error) {
+        res.status(400).json({
+            error: error.message,
+            details: error.errors ? Object.fromEntries(
+                Object.entries(error.errors).map(([key, val]) => [key, val.message])
+            ) : null
+        });
+    }
+});
+
+app.use('/servicios', express.static(path.join(__dirname, 'views/servicios')));
+app.use('/instalaciones', express.static(path.join(__dirname, 'views/facilities')));
+app.use('/iniciativas', express.static(path.join(__dirname, 'views/iniciativas')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/landing/index.html'));
+});
+
+app.get('/api/inventory', async (req, res) => {
+    try {
+        if (!req.session.userId) {
+            return res.status(401).json({ error: 'Authentication required' });
+        }
+
+        const items = await Inventory.find({ createdBy: req.session.userId })
+            .sort({ createdAt: -1 })
+            .lean();
+
+        res.json(items);
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Start Server
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});

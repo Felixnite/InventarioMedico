@@ -1,10 +1,8 @@
-const inventory = document.querySelector('#inventory')
+const inventory = document.querySelector('#inventory');
 const notification = document.querySelector('#notification');
-import { inventoryAPI } from '../../src/api/inventory.js'; 
-// import { createNotification } from './notification.js';
-// 1. Obtener referencia al formulario
-const createForm = document.querySelector('#createForm');
-
+import { inventoryAPI } from '/src/api/inventory.js';
+import { createNotification } from './notification.js';
+import '../public/styles.css';
 //Inventory for the admin view
 const crearInventarioAdmin = () => {
     inventory.innerHTML =
@@ -259,6 +257,15 @@ const crearInventarioAdmin = () => {
                            class="hidden w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-600">
                 </div>
             </div>
+
+            <!-- UsageType field -->
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Usage Type</label>
+                <select id="createUsageType" class="w-full px-3 py-2 border rounded-md">
+                <option value="Disposable">Disposable</option>
+                <option value="Reusable">Reusable</option>
+        </select>
+    </div>
 
             <!-- Dynamic Form Fields -->
             <div class="grid grid-cols-2 gap-4">
@@ -646,122 +653,308 @@ const crearInventarioStaff = () => {
     `
 }
 
-// Modal Handling
+let inventoryItems = []; // Global state for inventory items
+
+const initAdminInventory = async () => {
+    try {
+        inventoryItems = await inventoryAPI.getAllItems();
+        renderInventory(inventoryItems);
+        setupEventListeners();
+    } catch (error) {
+        createNotification(true, 'Failed to load inventory');
+    }
+};
+
+const renderInventory = (items) => {
+    inventory.innerHTML = `
+        ${getInventoryHeader()}
+        ${getInventoryTable(items)}
+        ${getModals()}
+    `;
+    
+    setTimeout(() => {
+        setupEventListeners();
+        setupFormValidation();
+    }, 0);
+};
+
 function setupEventListeners() {
-    // Botón de creación
     document.getElementById('createItemButton')?.addEventListener('click', openCreateModal);
-
-    // Botones de modales
-    document.querySelector('#createModal button')?.addEventListener('click', closeCreateModal);
-    document.querySelector('#editModal button')?.addEventListener('click', closeEditModal);
-
-    // En setupEventListeners()
-    document.querySelector('#createCategory').addEventListener('change', (e) => handleCategorySelect(e.target));
-    document.querySelector('#createProvider').addEventListener('change', (e) => handleProviderSelect(e.target));
-
-    // En setupEventListeners()
     document.getElementById('closeCreateModalButton')?.addEventListener('click', closeCreateModal);
-    // Botones de incremento/decremento
-    document.querySelectorAll('[data-action="increment"], [data-action="decrement"]').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const itemId = e.target.closest('tr').dataset.id;
-            const action = e.target.dataset.action;
-            handleQuantityChange(itemId, action);
-        });
-    });
-
-    // Botones de edición
-    document.querySelectorAll('[data-action="edit"]').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const itemId = e.target.closest('tr').dataset.id;
-            openEditModal(itemId);
-        });
+    
+    inventory.addEventListener('click', (e) => {
+        if (e.target.closest('[data-action="increment"]')) handleQuantityChange(e, 'increment');
+        if (e.target.closest('[data-action="decrement"]')) handleQuantityChange(e, 'decrement');
+        if (e.target.closest('[data-action="edit"]')) handleEditItem(e);
     });
 }
 
-function handleCategorySelect(select) {
-    const newInput = document.getElementById('newCategoryInput');
-    newInput.classList.toggle('hidden', select.value !== 'new');
-    newInput.required = select.value === 'new';
-  }
-  
-  function handleProviderSelect(select) {
-    const newInput = document.getElementById('newProviderInput');
-    newInput.classList.toggle('hidden', select.value !== 'new');
-    newInput.required = select.value === 'new';
-  }
-// ======================
-// Funciones de modales
-// ======================
-function openCreateModal() {
-    document.getElementById('createModal').classList.remove('hidden');
+function setupFormValidation() {
+    const createForm = document.querySelector('#createForm');
+    
+    createForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearErrors();
+
+        const formData = {
+            name: document.getElementById('createProductName').value.trim(),
+            quantity: parseInt(document.getElementById('createQuantity').value),
+            price: parseFloat(document.getElementById('createPrice').value),
+            location: document.getElementById('createLocation').value,
+            category: getSelectedCategory(),
+            provider: getSelectedProvider(),
+            usageType: document.getElementById('createUsageType').value,
+            expiryDate: new Date(document.getElementById('createExpiry').value)
+        };
+
+        // Frontend validation
+        let isValid = true;
+
+        if (!formData.name) {
+            showError('name', 'Product name is required');
+            isValid = false;
+        }
+
+        if (isNaN(formData.quantity) || formData.quantity < 0) {
+            showError('quantity', 'Quantity must be a positive number');
+            isValid = false;
+        }
+
+        if (isNaN(formData.price) || formData.price < 0) {
+            showError('price', 'Price must be a positive number');
+            isValid = false;
+        }
+
+        if (!formData.expiryDate || isNaN(formData.expiryDate)) {
+            showError('expiry', 'Expiry date is required');
+            isValid = false;
+        }
+
+        if (!isValid) return;
+
+        try {
+            await inventoryAPI.createItem(formData);
+            createNotification(false, 'Item created successfully!');
+            closeCreateModal();
+            await initAdminInventory(); // Refresh list
+        } catch (error) {
+            if (error.details) {
+                Object.entries(error.details).forEach(([field, message]) => {
+                    showError(field.toLowerCase(), message);
+                });
+            } else {
+                createNotification(true, error.message);
+            }
+        }
+    });
 }
 
-function closeCreateModal() {
-    document.getElementById('createModal').classList.add('hidden');
+// Helper functions
+function showError(field, message) {
+    const errorElement = document.getElementById(`${field}Error`);
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.remove('hidden');
+    }
 }
 
-function openEditModal(itemId) {
-    // Lógica para cargar datos del item
-    document.getElementById('editModal').classList.remove('hidden');
+function clearErrors() {
+    document.querySelectorAll('[id$="Error"]').forEach(el => {
+        el.classList.add('hidden');
+        el.textContent = '';
+    });
 }
 
-function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
+function getSelectedCategory() {
+    const select = document.getElementById('createCategory');
+    return select.value === 'new' 
+        ? document.getElementById('newCategoryInput').value
+        : select.value;
 }
 
-// ======================
-// Funciones de cantidad
-// ======================
-function handleQuantityChange(itemId, action) {
+function getSelectedProvider() {
+    const select = document.getElementById('createProvider');
+    return select.value === 'new'
+        ? document.getElementById('newProviderInput').value
+        : select.value;
+}
+
+function handleQuantityChange(e, action) {
+    const itemId = e.target.closest('tr').dataset.id;
     const quantityElement = document.getElementById(`${itemId}-quantity`);
     if (!quantityElement) return;
 
     let quantity = parseInt(quantityElement.textContent);
     quantity = action === 'increment' ? quantity + 1 : Math.max(0, quantity - 1);
     quantityElement.textContent = quantity;
+
+    // Optional: Update the backend with the new quantity
+    // inventoryAPI.updateItemQuantity(itemId, quantity);
 }
 
-// ======================
-// Manejo de formularios
-// ======================
-function setupFormValidation() {
-    const createForm = document.querySelector('#createForm');
+function handleEditItem(e) {
+    const itemId = e.target.closest('tr').dataset.id;
+    const item = inventoryItems.find(item => item._id === itemId);
+    if (!item) return;
 
-    createForm?.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    // Populate the edit modal with item data
+    document.getElementById('editProductName').value = item.name;
+    document.getElementById('editProductQuantity').value = item.quantity;
+    document.getElementById('editProductCategory').value = item.category;
+    document.getElementById('editProductProvider').value = item.provider;
+    document.getElementById('editProductExpiry').value = new Date(item.expiryDate).toISOString().split('T')[0];
+    document.getElementById('editProductPrice').value = item.price;
+    document.getElementById('editProductLocation').value = item.location;
 
-        const formData = {
-            name: document.getElementById('createProductName').value,
-            quantity: parseInt(document.getElementById('createQuantity').value),
-            // ... otros campos
-        };
-
-        try {
-            await inventoryAPI.createItem(formData);
-            createNotification(false, '¡Item creado exitosamente!');
-            closeCreateModal();
-            // Actualizar la tabla aquí
-        } catch (error) {
-            createNotification(true, error.message);
-        }
-    });
+    // Open the edit modal
+    document.getElementById('editModal').classList.remove('hidden');
 }
 
-// ======================
-// Notificaciones
-// ======================
-export function createNotification(isError, message) {
-    notification.textContent = message;
-    notification.classList.toggle('bg-red-500', isError);
-    notification.classList.toggle('bg-green-500', !isError);
-    notification.classList.remove('hidden');
-
-    setTimeout(() => notification.classList.add('hidden'), 3000);
+function openCreateModal() {
+    document.getElementById('createModal').classList.remove('hidden');
+    document.getElementById('createForm').reset();
+    clearErrors();
 }
 
-if (window.location.pathname === '/staff-home/') {
-    crearInventarioStaff()
-} else if (window.location.pathname === '/admin-home/') {
-    crearInventarioAdmin()
+function closeCreateModal() {
+    document.getElementById('createModal').classList.add('hidden');
 }
+
+// // Modal Handling
+// function setupEventListeners() {
+//     // Existing event listeners (keep these)
+//     document.getElementById('createItemButton')?.addEventListener('click', openCreateModal);
+//     document.querySelector('#createModal button')?.addEventListener('click', closeCreateModal);
+//     document.querySelector('#editModal button')?.addEventListener('click', closeEditModal);
+//     document.querySelector('#createCategory').addEventListener('change', (e) => handleCategorySelect(e.target));
+//     document.querySelector('#createProvider').addEventListener('change', (e) => handleProviderSelect(e.target));
+//     document.getElementById('closeCreateModalButton')?.addEventListener('click', closeCreateModal);
+
+//     // Add Step 5 code here:
+//     document.querySelectorAll('[data-action="increment"]').forEach(button => {
+//         button.addEventListener('click', handleIncrement);
+//     });
+
+//     document.querySelectorAll('[data-action="decrement"]').forEach(button => {
+//         button.addEventListener('click', handleDecrement);
+//     });
+
+//     // Existing edit button listeners (keep these)
+//     document.querySelectorAll('[data-action="edit"]').forEach(button => {
+//         button.addEventListener('click', (e) => {
+//             const itemId = e.target.closest('tr').dataset.id;
+//             openEditModal(itemId);
+//         });
+//     });
+// }
+
+// // Add these new functions outside setupEventListeners:
+// function handleIncrement(e) {
+//     const itemId = e.target.closest('tr').dataset.id;
+//     handleQuantityChange(itemId, 'increment');
+// }
+
+// function handleDecrement(e) {
+//     const itemId = e.target.closest('tr').dataset.id;
+//     handleQuantityChange(itemId, 'decrement');
+// }
+
+// function handleCategorySelect(select) {
+//     const newInput = document.getElementById('newCategoryInput');
+//     newInput.classList.toggle('hidden', select.value !== 'new');
+//     newInput.required = select.value === 'new';
+// }
+
+// function handleProviderSelect(select) {
+//     const newInput = document.getElementById('newProviderInput');
+//     newInput.classList.toggle('hidden', select.value !== 'new');
+//     newInput.required = select.value === 'new';
+// }
+// // ======================
+// // Funciones de modales
+// // ======================
+// function openCreateModal() {
+//     document.getElementById('createModal').classList.remove('hidden');
+// }
+
+// function closeCreateModal() {
+//     document.getElementById('createModal').classList.add('hidden');
+// }
+
+// function openEditModal(itemId) {
+//     // Lógica para cargar datos del item
+//     document.getElementById('editModal').classList.remove('hidden');
+// }
+
+// function closeEditModal() {
+//     document.getElementById('editModal').classList.add('hidden');
+// }
+
+// // ======================
+// // Funciones de cantidad
+// // ======================
+// function handleQuantityChange(itemId, action) {
+//     const quantityElement = document.getElementById(`${itemId}-quantity`);
+//     if (!quantityElement) return;
+
+//     let quantity = parseInt(quantityElement.textContent);
+//     quantity = action === 'increment' ? quantity + 1 : Math.max(0, quantity - 1);
+//     quantityElement.textContent = quantity;
+// }
+
+// // ======================
+// // Manejo de formularios
+// // ======================
+// function setupFormValidation() {
+//     document.addEventListener('click', async (e) => {
+//         if (e.target.closest('#createForm')) {
+//             e.preventDefault();
+//             const form = document.getElementById('createForm');
+            
+//             const formData = {
+//                 name: document.getElementById('createProductName').value,
+//                 quantity: parseInt(document.getElementById('createQuantity').value),
+//                 price: parseFloat(document.getElementById('createPrice').value),
+//                 location: document.getElementById('createLocation').value,
+//                 category: document.getElementById('createCategory').value === 'new' 
+//                     ? document.getElementById('newCategoryInput').value 
+//                     : document.getElementById('createCategory').value,
+//                 provider: document.getElementById('createProvider').value === 'new'
+//                     ? document.getElementById('newProviderInput').value
+//                     : document.getElementById('createProvider').value,
+//                 usageType: document.getElementById('createUsageType').value, // Fixed field
+//                 expiryDate: new Date(document.getElementById('createExpiry').value)
+//             };
+
+//             try {
+//                 await inventoryAPI.createItem(formData);
+//                 createNotification(false, 'Item created successfully!');
+//                 closeCreateModal();
+//                 // Refresh inventory
+//                 const items = await inventoryAPI.getAllItems();
+//                 renderInventory(items); // Add this function
+//             } catch (error) {
+//                 createNotification(true, error.message);
+//             }
+//         }
+//     });
+// }
+
+
+// // ======================
+// // Notificaciones
+// // ======================
+// export function createNotification(isError, message) {
+//     notification.textContent = message;
+//     notification.classList.toggle('bg-red-500', isError);
+//     notification.classList.toggle('bg-green-500', !isError);
+//     notification.classList.remove('hidden');
+
+//     setTimeout(() => notification.classList.add('hidden'), 3000);
+// }
+
+// if (window.location.pathname === '/staff-home/') {
+//     crearInventarioStaff()
+// } else if (window.location.pathname === '/admin-home/') {
+//     crearInventarioAdmin()
+// }

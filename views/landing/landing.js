@@ -3,7 +3,7 @@ const openButton = document.querySelector("#open-modal");
 const modalContainer = document.querySelector("#modal-component-container");
 const modal = document.querySelector("#modal-container");
 
-// Open modal function
+// Abrir modal function
 function openModal() {
     modalContainer.classList.remove('hidden');
     modalContainer.classList.add('flex'); // Changed to flex for centering
@@ -13,7 +13,7 @@ function openModal() {
     }, 10);
 }
 
-// Close modal function
+// Cerrar modal function
 function closeModal() {
     modalContainer.classList.remove('opacity-100');
     modal.classList.remove('scale-100');
