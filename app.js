@@ -13,6 +13,7 @@ const helmet = require('helmet');
 const Inventory = require('./model/inventory');
 
 // Database Connection
+
 (async () => {
     try {
         await mongoose.connect(process.env.MONGO_URL);
@@ -22,12 +23,9 @@ const Inventory = require('./model/inventory');
     }
 })();
 
+
 // Middleware
-app.use(
-    helmet({
-      contentSecurityPolicy: false
-    })
-  );
+
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors({
@@ -41,16 +39,22 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'secureAdminPass123',
     resave: false,
     saveUninitialized: false,
-    cookie: { 
+    cookie: {
         secure: false,
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000
     }
 }));
 
+// app.js
+
+app.use('/servicios', express.static(path.join(__dirname, 'views/servicios')));
+app.use('/iniciativas', express.static(path.join(__dirname, 'views/iniciativas')));
+app.use('/instalaciones', express.static(path.join(__dirname, 'views/facilities')));
 // Static Files
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/components', express.static(path.join(__dirname, 'views/components')));
+
+app.use(express.static(path.join(__dirname, 'public'))); // Serve files from /public at root (/)
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Frontend Routes
 app.use('/', express.static(path.join(__dirname, 'views/landing')));
@@ -76,7 +80,7 @@ app.post('/api/inventory', async (req, res) => {
         // Validate required fields
         const requiredFields = ['name', 'quantity', 'category', 'provider', 'usageType', 'expiryDate', 'price', 'location'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
-        
+
         if (missingFields.length > 0) {
             return res.status(400).json({
                 error: `Missing required fields: ${missingFields.join(', ')}`
@@ -102,13 +106,8 @@ app.post('/api/inventory', async (req, res) => {
     }
 });
 
-app.use('/servicios', express.static(path.join(__dirname, 'views/servicios')));
-app.use('/instalaciones', express.static(path.join(__dirname, 'views/facilities')));
-app.use('/iniciativas', express.static(path.join(__dirname, 'views/iniciativas')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/landing/index.html'));
-});
+
 
 app.get('/api/inventory', async (req, res) => {
     try {
@@ -131,4 +130,27 @@ app.get('/api/inventory', async (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
+});
+
+// app.js
+app.use('/src/api', express.static(path.join(__dirname, 'src/api'), {
+    setHeaders: (res) => {
+        res.setHeader('Content-Type', 'text/javascript');
+    }
+}));
+
+app.use('/public', express.static(path.join(__dirname, 'public'), {
+    setHeaders: (res) => {
+        res.setHeader('Content-Type', 'text/css');
+    }
+}));
+
+app.use(express.static(path.join(__dirname, 'public'), {
+    setHeaders: (res) => {
+        res.setHeader('Content-Type', 'text/css');
+    }
+}));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/landing/index.html'));
 });

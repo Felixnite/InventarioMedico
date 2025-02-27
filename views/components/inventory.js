@@ -953,8 +953,8 @@ function closeCreateModal() {
 //     setTimeout(() => notification.classList.add('hidden'), 3000);
 // }
 
-// if (window.location.pathname === '/staff-home/') {
-//     crearInventarioStaff()
-// } else if (window.location.pathname === '/admin-home/') {
-//     crearInventarioAdmin()
-// }
+if (window.location.pathname === '/staff-home/') {
+    crearInventarioStaff()
+} else if (window.location.pathname === '/admin-home/') {
+    crearInventarioAdmin()
+}

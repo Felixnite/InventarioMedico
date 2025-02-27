@@ -207,6 +207,6 @@ if (window.location.pathname === '/') {
     crearNavRegistro();
 } else if (window.location.pathname === '/staff-home/') {
     crearNavStaffHome();
-} else if (['/facilities/', '/iniciativas/','/servicios/'].includes(window.location.pathname)){
+} else if (['/instalaciones/', '/iniciativas/','/servicios/'].includes(window.location.pathname)){
     crearNavHome()
 }

@@ -1,17 +1,16 @@
-import axios from 'https://esm.sh/axios';
+import axios from 'axios';
 
 export const inventoryAPI = {
     createItem: async (itemData) => {
         try {
             const response = await axios.post('/api/inventory', itemData, {
-                withCredentials: true // Essential for session cookies
+                withCredentials: true
             });
             return response.data;
         } catch (error) {
             throw new Error(error.response?.data?.error || 'Item creation failed');
         }
     },
-
     getAllItems: async () => {
         try {
             const response = await axios.get('/api/inventory', {
