@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/user');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 // Add this admin-specific login route
 router.post('/admin-login', async (req, res) => {
@@ -13,7 +13,7 @@ router.post('/admin-login', async (req, res) => {
             return res.status(404).json({ error: 'Admin account not found' });
         }
 
-        const isMatch = await bcrypt.compare(password, adminUser.password);
+        const isMatch = await bcryptjs.compare(password, adminUser.password);
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid admin password' });
         }
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcryptjs.compare(password, user.password);
         if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
         // Set session for regular users
