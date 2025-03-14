@@ -1,24 +1,26 @@
 import axios from 'axios';
 
 export const inventoryAPI = {
-    createItem: async (itemData) => {
-        try {
-            const response = await axios.post('/api/inventory', itemData, {
-                withCredentials: true
-            });
-            return response.data;
-        } catch (error) {
-            throw new Error(error.response?.data?.error || 'Item creation failed');
-        }
-    },
     getAllItems: async () => {
         try {
-            const response = await axios.get('/api/inventory', {
-                withCredentials: true
-            });
-            return response.data;
+            const response = await fetch('/api/inventory');
+            return await response.json();
         } catch (error) {
-            throw new Error(error.response?.data?.error || 'Failed to load inventory');
+            throw new Error('Failed to fetch items');
+        }
+    },
+    createItem: async (data) => {
+        try {
+            const response = await fetch('/api/inventory', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+                credentials: 'include'
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('API Error:', error.message); // Add logging
+            throw error;
         }
     }
 };

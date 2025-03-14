@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "npx tailwindcss-cli@latest -i ./src/styles.css -o ./public/styles.css --no-map",
-    "start": "npm run build:css && nodemon index.js"
+    "start": "npm run build:css && node index.js"
   },
   "author": "",
   "license": "ISC",

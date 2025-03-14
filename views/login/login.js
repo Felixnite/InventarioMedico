@@ -85,7 +85,7 @@ adminSubmitBtn.addEventListener('click', async (e) => {
             localStorage.setItem('user', JSON.stringify(response.data.user));
             
             setTimeout(() => {
-                window.location.href = '/staff-home';
+                window.location.href = '/admin-home';
             }, 1500);
         }
     } catch (error) {

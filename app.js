@@ -30,8 +30,6 @@ app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors({
     origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
 app.use(cookieParser());
@@ -48,16 +46,16 @@ app.use(session({
 
 // app.js
 
+
 app.use('/servicios', express.static(path.join(__dirname, 'views/servicios')));
 app.use('/iniciativas', express.static(path.join(__dirname, 'views/iniciativas')));
 app.use('/instalaciones', express.static(path.join(__dirname, 'views/facilities')));
 // Static Files
-
-app.use(express.static(path.join(__dirname, 'public'))); // Serve files from /public at root (/)
-app.use('/public', express.static(path.join(__dirname, 'public')));
-
+app.use('/src', express.static(path.join(__dirname, 'src')));
+app.use(express.static(path.join(__dirname, 'public')));
 // Frontend Routes
 app.use('/', express.static(path.join(__dirname, 'views/landing')));
+app.use('/components', express.static(path.join(__dirname, 'views/components')));
 app.use('/components', express.static(path.join(__dirname, 'views/components')));
 app.use('/registro', express.static(path.join(__dirname, 'views/registro')));
 app.use('/login', express.static(path.join(__dirname, 'views/login')));
@@ -71,6 +69,8 @@ app.use('/api/auth', authRouter);
 
 // Inventory Routes
 app.post('/api/inventory', async (req, res) => {
+    console.log('Session:', req.session);
+    console.log('Request Body:', req.body); 
     try {
         // Verify session
         if (!req.session.userId) {
@@ -111,9 +111,9 @@ app.post('/api/inventory', async (req, res) => {
 
 app.get('/api/inventory', async (req, res) => {
     try {
-        if (!req.session.userId) {
-            return res.status(401).json({ error: 'Authentication required' });
-        }
+        // if (!req.session.userId) {
+        //     return res.status(401).json({ error: 'Authentication required' });
+        // }
 
         const items = await Inventory.find({ createdBy: req.session.userId })
             .sort({ createdAt: -1 })
@@ -127,7 +127,7 @@ app.get('/api/inventory', async (req, res) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

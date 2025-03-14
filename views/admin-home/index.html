@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
   <script type="importmap">
       {
         "imports": {
@@ -14,10 +14,10 @@
        </script>
 
   <!-- Load dependencies first -->
-  <script type="module" src="/src/api/inventory.js"></script>
+  <!-- <script type="module" src="/src/api/inventory.js"></script>
   <script src="./admin.js"></script>
   <script type="module" src="/components/notification.js"></script>
-  <script type="module" src="/components/inventory.js"></script>
+  <script type="module" src="/components/inventory.js"></script> -->
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
   <title>Admin home</title>
@@ -37,8 +37,8 @@
   </div>
   <!-- Remove duplicate script tags -->
   <script type="module" src="/src/api/inventory.js"></script>
-    <script type="module" src="../components/inventory.js"></script>
-  <script src="/components/notification.js"></script>
+  <script type="module" src="/components/inventory.js?v=1"></script>
+  <script type="module" src="/components/notification.js?v=1"></script>
 </body>
 
 </html>

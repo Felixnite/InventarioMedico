@@ -2,25 +2,14 @@ const Inventory = require('../model/inventory');
 
 exports.createItem = async (req, res) => {
     try {
-        // Verify session
-        if (!req.session.userId) {
+        if (!req.session.userId) {  // Make sure this matches your session structure
             return res.status(401).json({ error: 'Authentication required' });
         }
 
-        // Validate required fields
-        const requiredFields = ['name', 'quantity', 'category', 'provider', 'usageType', 'expiryDate', 'price', 'location'];
-        const missingFields = requiredFields.filter(field => !req.body[field]);
-        
-        if (missingFields.length > 0) {
-            return res.status(400).json({
-                error: `Missing required fields: ${missingFields.join(', ')}`
-            });
-        }
-
-        // Create item
+        // Rest of the code remains the same
         const newItem = new Inventory({
             ...req.body,
-            createdBy: req.session.userId
+            createdBy: req.session.userId  // This should now work
         });
 
         const savedItem = await newItem.save();
