@@ -4,7 +4,7 @@ module.exports = {
   content: [
     "./views/**/*.html",  
     "./src/**/*.js",
-    "./views/landing/index.html"
+    
   ],
   theme: {
     extend: {
