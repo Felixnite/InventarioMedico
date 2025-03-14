@@ -62,7 +62,7 @@ app.use('/login', express.static(path.join(__dirname, 'views/login')));
 app.use('/staff-home', express.static(path.join(__dirname, 'views/staff-home')));
 app.use('/admin-home', express.static(path.join(__dirname, 'views/admin-home')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
-
+app.use('/styles.css', express.static(path.join(__dirname, 'public/styles.css')));
 // Backend Routes
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
