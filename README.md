@@ -3,6 +3,9 @@
 Sistema simple para administrar inventario de insumos médicos.  
 Hecho con Node.js, Express, MongoDB y Tailwind CSS.
 
+# Link de la web
+https://inventariomedico.onrender.com
+
 ### Características:
 - 📋 Vista de administrador y personal médico
 - 🔍 Filtros para buscar medicamentos/equipos
