@@ -208,3 +208,9 @@ const crearInventarioStaff = () => {
 
     `
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.pathname === '/staff-home/') {
+        crearInventarioStaff();
+    }
+});

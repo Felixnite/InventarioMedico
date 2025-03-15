@@ -1,6 +1,7 @@
 <!-- index.html (login) -->
 <!DOCTYPE html>
 <html lang="en" class="h-full">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,25 +29,27 @@
             </div>
             <form id="loginForm" class="mt-8 space-y-6">
                 <div class="relative">
-                    <input type="email" id="login_email" 
-                           class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
-                           placeholder=" " required/>
-                    <label for="login_email" 
-                           class="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-blue-600">
+                    <input type="email" id="login_email"
+                        class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
+                        placeholder=" " required />
+                    <label for="login_email"
+                        class="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-blue-600">
                         Email address
                     </label>
-                    <span class="hidden absolute right-0 -bottom-5 text-sm text-red-500" id="email-error">Invalid email format</span>
+                    <span class="hidden absolute right-0 -bottom-5 text-sm text-red-500" id="email-error">Invalid email
+                        format</span>
                 </div>
 
                 <div class="relative">
-                    <input type="password" id="login_password" 
-                           class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
-                           placeholder=" " required/>
-                    <label for="login_password" 
-                           class="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-blue-600">
+                    <input type="password" id="login_password"
+                        class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
+                        placeholder=" " required />
+                    <label for="login_password"
+                        class="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-blue-600">
                         Password
                     </label>
-                    <span class="hidden absolute right-0 -bottom-5 text-sm text-red-500" id="password-error">Password is required</span>
+                    <span class="hidden absolute right-0 -bottom-5 text-sm text-red-500" id="password-error">Password is
+                        required</span>
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -58,18 +61,18 @@
                 </div>
 
                 <button type="submit" id="login-btn"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#4769c2] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4769c2] disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#4769c2] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4769c2] disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
                     Iniciar Sesión
                 </button>
-                
+
                 <a type="button" href="/registro/" id="registro-btn"
-                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#4769c2] bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4769c2] disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-            Registrarse
-            </a>
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#4769c2] bg-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4769c2] disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                    Registrarse
+                </a>
 
                 <div class="text-center">
                     <button type="button" id="admin-login-btn"
-                            class="text-sm text-[#4769c2] hover:text-blue-500 focus:outline-none">
+                        class="text-sm text-[#4769c2] hover:text-blue-500 focus:outline-none">
                         Ingresa aqui como administrador
                     </button>
                 </div>
@@ -84,23 +87,24 @@
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Inicio Admin</h3>
                 <div class="mt-2 px-7 py-3">
                     <div class="relative mb-4">
-                        <input type="password" id="admin_password" 
-                               class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
-                               placeholder=" " required/>
-                        <label for="admin_password" 
-                               class="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-blue-600">
+                        <input type="password" id="admin_password"
+                            class="peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
+                            placeholder=" " required />
+                        <label for="admin_password"
+                            class="absolute left-0 -top-3.5 text-gray-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-blue-600">
                             Admin Password
                         </label>
-                        <span class="hidden absolute right-0 -bottom-5 text-sm text-red-500" id="admin-error">Password is required</span>
+                        <span class="hidden absolute right-0 -bottom-5 text-sm text-red-500" id="admin-error">Password
+                            is required</span>
                     </div>
                 </div>
                 <div class="items-center px-4 py-3">
                     <button id="admin-submit-btn"
-                            class="px-4 py-2 bg-[#4769c2] text-white text-base font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="px-4 py-2 bg-[#4769c2] text-white text-base font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Iniciar Sesión como Admin
                     </button>
                     <button id="close-modal-btn"
-                            class="ml-3 mt-1 px-4 py-2 bg-gray-100 text-gray-700 text-base font-medium rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                        class="ml-3 mt-1 px-4 py-2 bg-gray-100 text-gray-700 text-base font-medium rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500">
                         Cancel
                     </button>
                 </div>

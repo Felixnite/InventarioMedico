@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instalaciones - StayWell</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./index.css">
 </head>
+
 <body class="font-poppins bg-gray-50">
     <div id="navegacion">
-    
+
     </div>
     <!-- Hero Section -->
     <section class="bg-gradient-to-br from-[#4769c2] to-[#97c76b] py-24 px-6">
@@ -32,7 +36,8 @@
             <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
                 <div class="w-20 h-20 bg-[#97c76b] rounded-2xl flex items-center justify-center mb-6">
                     <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Urgencias 24/7</h3>
@@ -46,7 +51,8 @@
             <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
                 <div class="w-20 h-20 bg-[#4769c2] rounded-2xl flex items-center justify-center mb-6">
                     <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Quirófanos Inteligentes</h3>
@@ -60,7 +66,8 @@
             <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
                 <div class="w-20 h-20 bg-[#edbd45] rounded-2xl flex items-center justify-center mb-6">
                     <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Habitaciones Premium</h3>
@@ -111,20 +118,35 @@
                 Nuestras Instalaciones
             </h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden">
-                    <img src="/img/lobby.jpg" alt="Recepción" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                <!-- Recepción (1:1 ratio) -->
+                <div class="aspect-[4/3] md:aspect-square bg-gray-100 rounded-2xl overflow-hidden col-span-1">
+                    <img src="/img/reception.jpg" alt="Recepción"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform">
                 </div>
-                <div class="aspect-video md:aspect-square bg-gray-100 rounded-2xl overflow-hidden col-span-2">
-                    <img src="/img/lab.jpg" alt="Laboratorio" class="w-full h-full object-cover hover:scale-105 transition-transform">
+
+                <!-- Laboratorio (2:1 ratio on mobile, 3:2 on desktop) -->
+                <div
+                    class="aspect-[2/1] md:aspect-[4/2] bg-gray-100 rounded-2xl overflow-hidden col-span-2 md:col-span-2">
+                    <img src="/img/lab1.jpg" alt="Laboratorio"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform">
                 </div>
-                <div class="aspect-video bg-gray-100 rounded-2xl overflow-hidden">
-                    <img src="/img/garden.jpg" alt="Jardines" class="w-full h-full object-cover hover:scale-105 transition-transform">
+
+                <!-- Jardines (Maintain video aspect) -->
+                <div class="aspect-video bg-gray-100 rounded-2xl overflow-hidden col-span-2 md:col-span-1">
+                    <img src="/img/garden.jpg" alt="Jardines"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform">
                 </div>
-                <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden">
-                    <img src="/img/cafeteria.jpg" alt="Cafetería" class="w-full h-full object-cover hover:scale-105 transition-transform">
+
+                <!-- Cafetería (1:1 ratio) -->
+                <div class="aspect-[4/3] md:aspect-square bg-gray-100 rounded-2xl overflow-hidden col-span-1">
+                    <img src="/img/cafeteria.jpg" alt="Cafetería"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform">
                 </div>
-                <div class="aspect-video bg-gray-100 rounded-2xl overflow-hidden">
-                    <img src="/img/pharmacy.jpg" alt="Farmacia" class="w-full h-full object-cover hover:scale-105 transition-transform">
+
+                <!-- Farmacia (Maintain video aspect) -->
+                <div class="aspect-video bg-gray-100 rounded-2xl overflow-hidden col-span-2 md:col-span-1">
+                    <img src="/img/pharmacy.jpg" alt="Farmacia"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform">
                 </div>
             </div>
         </div>
@@ -134,11 +156,15 @@
     <section class="bg-[#4769c2] py-20 px-6">
         <div class="max-w-4xl mx-auto text-center text-white">
             <h2 class="text-3xl md:text-4xl font-bold mb-6 font-playfair">Ven y Conoce Nuestras Instalaciones</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">Agenda un recorrido guiado y descubre por qué somos referencia en cuidado médico</p>
-            <button class="bg-white text-[#4769c2] px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl">
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Agenda un recorrido guiado y descubre por qué somos referencia en
+                cuidado médico</p>
+            <button
+                class="bg-white text-[#4769c2] px-8 py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-xl">
                 Programar Visita
             </button>
         </div>
     </section>
-<script src="../components/nav.js"></script></body>
+    <script src="../components/nav.js"></script>
+</body>
+
 </html>

@@ -1,26 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios Médicos - StayWell</title>
     <link href="/styles.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <style>
-        .font-poppins { font-family: 'Poppins', sans-serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out; }
+        @media (max-width: 768px) {
+            .md\\:hidden {
+                display: none;
+            }
+
+            .md\\:flex {
+                display: flex;
+            }
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body class="font-poppins bg-gray-50">
-<div id="navegacion">
-    
-</div>
+    <div id="navegacion">
+
+    </div>
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-[#4769c2] to-[#97c76b] py-20 px-6">
         <div class="max-w-7xl mx-auto text-center animate-fadeInUp">
@@ -28,7 +58,8 @@
                 Excelencia Médica en Cada Servicio
             </h1>
             <p class="text-xl text-white opacity-90 max-w-3xl mx-auto font-poppins">
-                En StayWell combinamos tecnología de vanguardia con atención humana para ofrecer cuidado integral en más de 50 especialidades médicas.
+                En StayWell combinamos tecnología de vanguardia con atención humana para ofrecer cuidado integral en más
+                de 50 especialidades médicas.
             </p>
             <div class="mt-12">
                 <img src="/img/doctors.svg" alt="Equipo médico" class="w-full max-w-md mx-auto h-auto">
@@ -43,36 +74,41 @@
             <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
                 <div class="w-20 h-20 bg-[#97c76b] rounded-2xl flex items-center justify-center mb-6">
                     <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Cirugías de Alta Complejidad</h3>
-                <p class="text-gray-600 mb-1">Tecnología robótica y equipo multidisciplinario para intervenciones quirúrgicas precisas</p>
-                
+                <p class="text-gray-600 mb-1">Tecnología robótica y equipo multidisciplinario para intervenciones
+                    quirúrgicas precisas</p>
+
             </div>
 
             <!-- Tarjeta Consultorios -->
             <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
                 <div class="w-20 h-20 bg-[#4769c2] rounded-2xl flex items-center justify-center mb-6">
                     <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Consultorios Especializados</h3>
                 <p class="text-gray-600 mb-1">Más de 100 profesionales en 50 especialidades médicas a tu disposición</p>
-                
+
             </div>
 
             <!-- Tarjeta Diagnóstico -->
             <div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8">
                 <div class="w-20 h-20 bg-[#edbd45] rounded-2xl flex items-center justify-center mb-6">
                     <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Diagnóstico Avanzado</h3>
-                <p class="text-gray-600 mb-1">Equipos de última generación para estudios precisos y resultados rápidos</p>
-                
+                <p class="text-gray-600 mb-1">Equipos de última generación para estudios precisos y resultados rápidos
+                </p>
+
             </div>
         </div>
     </section>
@@ -82,9 +118,10 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-playfair">Nuestras Especialidades</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Cuidado integral en todas las áreas de la medicina moderna</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">Cuidado integral en todas las áreas de la medicina moderna
+                </p>
             </div>
-            
+
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="hidden md:block">
                     <img src="/img/experts.svg" alt="Especialidades médicas" class="w-full h-auto">
@@ -92,7 +129,7 @@
                 <div class="bg-white rounded-2xl p-8 shadow-lg">
 
                     <div class="grid grid-cols-2 gap-8">
-                        
+
                         <!-- Columna 1 -->
                         <div class="space-y-6">
                             <div class="flex items-center gap-4">
@@ -110,15 +147,15 @@
                             <!-- Añadir más especialidades -->
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 bg-[#97c76b] rounded-lg flex items-center justify-center">
-                                    ❤️
+                                    🦷
                                 </div>
-                                <h3 class="text-xl font-semibold">Cardiología</h3>
+                                <h3 class="text-xl font-semibold">Odontología</h3>
                             </div>
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 bg-[#4769c2] rounded-lg flex items-center justify-center">
-                                    🧠
+                                    🩺
                                 </div>
-                                <h3 class="text-xl font-semibold">Neurología</h3>
+                                <h3 class="text-xl font-semibold">Medicina General</h3>
                             </div>
                         </div>
 
@@ -139,21 +176,21 @@
                             <!-- Añadir más especialidades -->
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 bg-[#4769c2] rounded-lg flex items-center justify-center">
-                                    🧠
+                                    🦷
                                 </div>
-                                <h3 class="text-xl font-semibold">Neurología</h3>
+                                <h3 class="text-xl font-semibold">Cirugía Dental</h3>
                             </div>
                             <div class="flex items-center gap-4">
                                 <div class="w-12 h-12 bg-[#97c76b] rounded-lg flex items-center justify-center">
-                                    👶
+                                    👀
                                 </div>
-                                <h3 class="text-xl font-semibold">Pediatría</h3>
+                                <h3 class="text-xl font-semibold">Oftalmología</h3>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
     </section>
@@ -162,7 +199,8 @@
     <section class="py-20 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 font-playfair">Tecnología al Servicio de la Salud</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 font-playfair">Tecnología al Servicio de la
+                    Salud</h2>
                 <div class="space-y-6">
                     <div class="p-6 bg-white rounded-xl shadow-sm border-l-4 border-[#4769c2]">
                         <h3 class="text-xl font-semibold mb-2">Imagenología Avanzada</h3>
@@ -191,54 +229,178 @@
                         <!-- Card 1 -->
                         <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
                             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
-                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
-                                <p class="text-gray-600 mb-2">Cardiólogo</p>
-                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                                <div
+                                    class="w-full h-64 rounded-lg mb-4 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-blue-600" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M12 21.5C7.85786 21.5 4 17.6421 4 13C4 8.35786 7.85786 4.5 12 4.5C16.1421 4.5 20 8.35786 20 13C20 17.6421 16.1421 21.5 12 21.5Z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M12 8V13L15 14.5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800">Dra. María Gómez</h3>
+                                <p class="text-gray-600 mb-2">Cardiología</p>
+                                <p class="text-sm text-gray-500 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    15 años de experiencia
+                                </p>
                             </div>
                         </div>
-                        <!-- Repetir para más doctores -->
+
+                        <!-- Card 2 -->
                         <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
                             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
-                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
-                                <p class="text-gray-600 mb-2">Cardiólogo</p>
-                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                                <div
+                                    class="w-full h-64 rounded-lg mb-4 bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-purple-600" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M12 19.5C15.866 19.5 19 16.366 19 12C19 7.634 15.866 4.5 12 4.5C8.134 4.5 5 7.634 5 12C5 16.366 8.134 19.5 12 19.5Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path
+                                            d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path d="M8 16C8 16 9 18 12 18C15 18 16 16 16 16" stroke="currentColor"
+                                            stroke-width="2" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Carlos Ruiz</h3>
+                                <p class="text-gray-600 mb-2">Neurología</p>
+                                <p class="text-sm text-gray-500 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    12 años de experiencia
+                                </p>
                             </div>
                         </div>
+
+                        <!-- Card 3 -->
                         <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
                             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
-                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
-                                <p class="text-gray-600 mb-2">Cardiólogo</p>
-                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                                <div
+                                    class="w-full h-64 rounded-lg mb-4 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-green-600" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M17 21H7C5.34315 21 4 19.6569 4 18V6C4 4.34315 5.34315 3 7 3H17C18.6569 3 20 4.34315 20 6V18C20 19.6569 18.6569 21 17 21Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path d="M12 8V14M9 11H15" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800">Dra. Ana Torres</h3>
+                                <p class="text-gray-600 mb-2">Pediatría</p>
+                                <p class="text-sm text-gray-500 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    8 años de experiencia
+                                </p>
                             </div>
                         </div>
+
+                        <!-- Card 4 -->
                         <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
                             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
-                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
-                                <p class="text-gray-600 mb-2">Cardiólogo</p>
-                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                                <div
+                                    class="w-full h-64 rounded-lg mb-4 bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-yellow-600" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Luis Fernández</h3>
+                                <p class="text-gray-600 mb-2">Cirugía General</p>
+                                <p class="text-sm text-gray-500 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    20 años de experiencia
+                                </p>
                             </div>
                         </div>
+
+                        <!-- Card 5 -->
                         <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
                             <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
-                                <img src="/img/doctor1.jpg" alt="Dr. Juan Pérez" class="w-full h-64 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-bold text-gray-800">Dr. Juan Pérez</h3>
-                                <p class="text-gray-600 mb-2">Cardiólogo</p>
-                                <p class="text-sm text-gray-500">20 años de experiencia</p>
+                                <div
+                                    class="w-full h-64 rounded-lg mb-4 bg-gradient-to-br from-pink-50 to-pink-100 flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-pink-600" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C16.418 20 20 16.418 20 12C20 7.582 16.418 4 12 4C7.582 4 4 7.582 4 12C4 16.418 7.582 20 12 20Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path
+                                            d="M12 15C13.657 15 15 13.657 15 12C15 10.343 13.657 9 12 9C10.343 9 9 10.343 9 12C9 13.657 10.343 15 12 15Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800">Dra. Elena Pérez</h3>
+                                <p class="text-gray-600 mb-2">Oftalmología</p>
+                                <p class="text-sm text-gray-500 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    10 años de experiencia
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4">
+                            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all p-6">
+                                <div
+                                    class="w-full h-64 rounded-lg mb-4 bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-indigo-600" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path
+                                            d="M12 14C14.2091 14 16 15.7909 16 18C16 20.2091 14.2091 22 12 22C9.79086 22 8 20.2091 8 18C8 15.7909 9.79086 14 12 14Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path d="M17 11H21M3 11H7M12 14V22" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800">Dr. Pablo Méndez</h3>
+                                <p class="text-gray-600 mb-2">Ortopedia</p>
+                                <p class="text-sm text-gray-500 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    18 años de experiencia
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Controles del Carrusel -->
-                <button id="prevButton" class="absolute top-1/2 -left-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-                    &larr;
+                <button id="prevButton"
+                    class="absolute top-1/2 -left-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
                 </button>
-                <button id="nextButton" class="absolute top-1/2 -right-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-                    &rarr;
+                <button id="nextButton"
+                    class="absolute top-1/2 -right-12 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
                 </button>
             </div>
         </div>
@@ -279,4 +441,5 @@
     <script src="./servicios.js"></script>
     <script src="../components/nav.js"></script>
 </body>
+
 </html>
