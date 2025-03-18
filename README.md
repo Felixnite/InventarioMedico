@@ -9,7 +9,6 @@ https://inventariomedico.onrender.com
 
 ### Características:
 - 📋 Vista de administrador y personal médico
-- 🔍 Filtros para buscar medicamentos/equipos
 - ➕ Formulario para agregar nuevos items
 - ✏️ Editar cantidades y detalles
 
