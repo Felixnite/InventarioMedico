@@ -5,6 +5,7 @@ Hecho con Node.js, Express, MongoDB y Tailwind CSS.
 
 # Link de la web
 https://inventariomedico.onrender.com
+(Contraseña admin: "Gabo2006")
 
 ### Características:
 - 📋 Vista de administrador y personal médico
